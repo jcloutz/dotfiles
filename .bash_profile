@@ -1,5 +1,10 @@
 # Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH";
+export PATH="$HOME/bin:~/.composer/vendor/bin:$PATH";
+
+# Homestead global control
+function homestead() {
+    ( cd ~/Homestead && vagrant $* )
+}
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
