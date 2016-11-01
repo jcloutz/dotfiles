@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Laravel
+alias art="php artisan"
+
+function m() {
+    ( php artisan make$* )
+}
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
