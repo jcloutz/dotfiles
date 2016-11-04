@@ -5,6 +5,13 @@
 .DS_Store
 Desktop.ini
 
+# Logs
+*.log
+
+# Editor files and folders
+.vscode/
+*.sublime-*
+
 # Thumbnail cache files
 ._*
 Thumbs.db
@@ -12,3 +19,7 @@ Thumbs.db
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes
+
+# Node & Composer
+vendor/
+node_modules/
