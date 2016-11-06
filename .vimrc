@@ -1,3 +1,5 @@
+execute pathogen#infect()
+
 if (empty($TMUX))
   if (has("nvim"))
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -7,11 +9,24 @@ if (empty($TMUX))
   endif
 endif
 
+if has("gui_running")
+    if has("gui_gtk")
+        set guifont=RobotoMono-Medium\ 12
+    elseif has("gui_macvim")
+        set guifont=RobotoMono-Medium:h12
+    elseif has("gui_win32")
+        set guifont=Consolal:h11:cANSI
+    endif
+endif
+
 " Use the Solarized Dark theme
 set background=dark
 colorscheme onedark
 let g:onedark_termcolors=16
 
+syntax enable
+set linespace=5
+let macvim_skip_colorscheme = 1
 " Make Vim more useful
 set nocompatible
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
@@ -56,7 +71,7 @@ syntax on
 " Highlight current line
 set cursorline
 " Make tabs as wide as two spaces
-set tabstop=2
+set tabstop=4
 " Show “invisible” characters
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
@@ -107,7 +122,7 @@ noremap <leader>W :w !sudo tee % > /dev/null<CR>
 " Automatic commands
 if has("autocmd")
 	" Enable file type detection
-	filetype on
+	filetype plugin indent on
 	" Treat .json files as .js
 	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 	" Treat .md files as Markdown
