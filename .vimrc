@@ -12,19 +12,6 @@ if (empty($TMUX))
   endif
 endif
 
-if has("gui_running")
-    if has("gui_gtk")
-        set guifont=RobotoMono-Regular\ 13
-    elseif has("gui_macvim")
-        set guifont=RobotoMono-Regular:h12
-    endif
-endif
-
-
-" Use the Solarized Dark theme
-set background=dark
-colorscheme onedark
-let g:onedark_termcolors=16
 
 syntax enable
 set linespace=10
@@ -133,12 +120,25 @@ endif
 
 
 " -----------Visuals--------------"
+if has("gui_running")
+    if has("gui_gtk")
+        set guifont=Fira_code\ 13
+    elseif has("gui_macvim")
+        set guifont=Fira_Code:h12
+    endif
+endif
+
+set background=dark
+colorscheme onedark
+let g:onedark_termcolors=16
+
 set guioptions-=l
 set guioptions-=L
 
 set guioptions-=r
 set guioptions-=R
-
+set guioptions-=e
+set macligatures
 " -----------Mappings--------------"
 "Easily edit the vimrc file"
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
@@ -146,9 +146,6 @@ nmap <Leader>ev :tabedit $MYVIMRC<cr>
 "Search highlight removal"
 nmap <Leader><space> :nohlsearch<cr>
 
-nmap <D-\> :NERDTreeToggle<cr>
-nmap <C-R> :CtrlPBufTag<cr>
-nmap <D-e> :CtrlPMRUFiles<cr>
 
 "-------------Split Management--------"
 "/
@@ -158,6 +155,16 @@ nmap <D-e> :CtrlPMRUFiles<cr>
 let g:ctrlp_match_window = 'top,order::ttb,min;1,max:30,results:30'
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|vendor|target|dist)|(\.(swp|ico|git|svn))$'
 "let g:ctrlp_user_command = 'find %s -type f | grep -v "`cat .ctrlpignore`"'
+
+nmap <D-R> :CtrlPBufTag<cr>
+nmap <D-e> :CtrlPMRUFiles<cr>
+nmap <D-p> :CtrlP<cr>
+
+"/
+"/ NERDTree
+"/
+let NERDTreeHijackNetrw = 0
+nmap <D-\> :NERDTreeToggle<cr>
 
 "-------------Split Management--------"
 set splitright
