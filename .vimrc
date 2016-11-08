@@ -1,4 +1,7 @@
-execute pathogen#infect()
+set nocompatible              " be iMproved, required
+
+so ~/.vim/plugins.vim
+
 
 if (empty($TMUX))
   if (has("nvim"))
@@ -11,13 +14,12 @@ endif
 
 if has("gui_running")
     if has("gui_gtk")
-        set guifont=RobotoMono-Medium\ 12
+        set guifont=RobotoMono-Regular\ 13
     elseif has("gui_macvim")
-        set guifont=RobotoMono-Medium:h12
-    elseif has("gui_win32")
-        set guifont=Consolal:h11:cANSI
+        set guifont=RobotoMono-Regular:h12
     endif
 endif
+
 
 " Use the Solarized Dark theme
 set background=dark
@@ -25,7 +27,7 @@ colorscheme onedark
 let g:onedark_termcolors=16
 
 syntax enable
-set linespace=5
+set linespace=10
 let macvim_skip_colorscheme = 1
 " Make Vim more useful
 set nocompatible
@@ -128,3 +130,47 @@ if has("autocmd")
 	" Treat .md files as Markdown
 	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 endif
+
+
+" -----------Visuals--------------"
+set guioptions-=l
+set guioptions-=L
+
+set guioptions-=r
+set guioptions-=R
+
+" -----------Mappings--------------"
+"Easily edit the vimrc file"
+nmap <Leader>ev :tabedit $MYVIMRC<cr>
+
+"Search highlight removal"
+nmap <Leader><space> :nohlsearch<cr>
+
+nmap <D-\> :NERDTreeToggle<cr>
+nmap <C-R> :CtrlPBufTag<cr>
+nmap <D-e> :CtrlPMRUFiles<cr>
+
+"-------------Split Management--------"
+"/
+"/ CtrlP
+"/
+"let g:ctrlp_custom_ignore = 'node_modules\|vendor\|DS_Store\|git'
+let g:ctrlp_match_window = 'top,order::ttb,min;1,max:30,results:30'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|vendor|target|dist)|(\.(swp|ico|git|svn))$'
+"let g:ctrlp_user_command = 'find %s -type f | grep -v "`cat .ctrlpignore`"'
+
+"-------------Split Management--------"
+set splitright
+set splitbelow
+
+nmap <C-J> <C-W><C-J>
+nmap <C-K> <C-W><C-K>
+nmap <C-H> <C-W><C-H>
+nmap <C-L> <C-W><C-L>
+
+"-------------Auto-Commands---------"
+"Automatically source the vimrc file on save"
+augroup autosourcing
+	autocmd!
+	autocmd BufWritePost .vimrc source %
+augroup END
