@@ -11,6 +11,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'wakatime/vim-wakatime'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
