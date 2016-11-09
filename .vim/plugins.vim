@@ -12,6 +12,8 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'wakatime/vim-wakatime'
+Plugin 'albfan/nerdtree-git-plugin'
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required

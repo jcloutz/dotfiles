@@ -123,7 +123,7 @@ endif
 if has("gui_running")
     if has("gui_gtk")
         set guifont=Fira_code\ 13
-    elseif has("gui_macvim")
+    elseif has("gui_Macvim")
         set guifont=Fira_Code:h12
     endif
 endif
@@ -138,8 +138,10 @@ set guioptions-=L
 set guioptions-=r
 set guioptions-=R
 set guioptions-=e
-set macligatures
-" -----------Mappings--------------"
+if has("gui_macvim")
+	set macligatures
+endif
+" ---------Mappings--------------"
 "Easily edit the vimrc file"
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
 
