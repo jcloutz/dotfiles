@@ -40,6 +40,10 @@ brew install wget --with-iri
 brew install ringojs
 brew install narwhal
 
+# Install Golan & Hugo
+brew instal go
+brew install hugo
+
 # Macvim
 brew install Caskroom/cask/macvim
 brew install ctags

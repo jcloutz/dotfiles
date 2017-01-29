@@ -1,6 +1,8 @@
 # Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:~/.composer/vendor/bin:$PATH";
+export PATH="$HOME/bin:~/.composer/vendor/bin:$HOME/develop/GoCode/bin:$PATH";
 
+export GOPATH="$HOME/develop/GoCode/"
+export GOBIN="$HOME/develop/GoCode/bin"
 # Homestead global control
 function homestead() {
     ( cd ~/Homestead && vagrant $* )
