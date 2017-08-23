@@ -7,6 +7,10 @@ export GOBIN="$HOME/develop/GoCode/bin"
 function homestead() {
     ( cd ~/Homestead && vagrant $* )
 }
+eval "$(direnv hook bash)"
+
+alias qq="$(echo "$GOPATH" | cut -d : -f 1)/src/github.com/y0ssar1an/q/q.sh"
+alias rmqq="rm $TMPDIR/q"
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -33,10 +37,14 @@ for option in autocd globstar; do
 done;
 
 # Add tab completion for many Bash commands
-if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-	source "$(brew --prefix)/share/bash-completion/bash_completion";
-elif [ -f /etc/bash_completion ]; then
-	source /etc/bash_completion;
+# if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+# 	source "$(brew --prefix)/share/bash-completion/bash_completion";
+# elif [ -f /etc/bash_completion ]; then
+# 	source /etc/bash_completion;
+# fi;
+
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+. $(brew --prefix)/etc/bash_completion
 fi;
 
 # Enable tab completion for `g` by marking it as an alias for `git`

@@ -183,3 +183,7 @@
 [user]
 	name = Jeremy Cloutier
 	email = jcloutier24@yahoo.com
+[http "https://gopkg.in"]
+	followRedirects = true
+# [http "https://upper.io"]
+# 	followRedirects = true
