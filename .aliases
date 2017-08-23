@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-alias dot="cd ~/dotfiles && s"
+alias dot="cd ~/dotfiles && c"
 # Laravel
 alias art="php artisan"
 alias pa="php artisan"

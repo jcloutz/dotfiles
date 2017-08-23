@@ -90,3 +90,37 @@ source "${HOME}/.zgen/subnixr/minimal-master/minimal.zsh"
 source ~/.aliases
 
 eval "$(direnv hook zsh)"
+
+function mkgoproject {
+  TRAPINT() {
+    print "Caught SIGINT, aborting."
+    return $(( 128 + $1 ))
+  }
+  echo 'Creating new Go project:'
+  if [ -n "$1" ]; then
+    project=$1
+  else
+    while [[ -z "$project" ]]; do
+      vared -p 'what is your project name: ' -c project;
+    done
+  fi
+  namespace='github.com/jcloutz'
+  while true; do
+    vared -p 'what is your project namespace: ' -c namespace
+    if [ -n "$namespace" ] ; then
+       break
+    fi
+  done
+  mkdir -p $project/src/$namespace/$project
+  git init -q $project/src/$namespace/$project
+  main=$project/src/$namespace/$project/main.go
+  echo 'export GOPATH=$(PWD):$GOPATH' >> $project/.envrc
+  echo 'export PATH=$(PWD)/bin:$PATH' >> $project/.envrc
+  echo 'package main' >> $main
+  echo 'import "fmt"' >> $main
+  echo 'func main() {' >> $main
+  echo '    fmt.Println("hello world")' >> $main
+  echo '}' >> $main
+  direnv allow $project
+  echo "cd $project/src/$namespace/$project #to start coding"
+}
