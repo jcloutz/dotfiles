@@ -88,3 +88,5 @@ source $ZSH/oh-my-zsh.sh
 source "${HOME}/.zgen/zgen.zsh"
 source "${HOME}/.zgen/subnixr/minimal-master/minimal.zsh"
 source ~/.aliases
+
+eval "$(direnv hook zsh)"

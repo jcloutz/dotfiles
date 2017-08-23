@@ -4,3 +4,5 @@
 --ignore LICENSE-MIT.txt
 --ignore README.md
 --ignore vim-setup.sh
+--ignore .DS_Store
+--ignore .stowrc
