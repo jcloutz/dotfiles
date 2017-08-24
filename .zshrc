@@ -83,7 +83,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH=$PATH:$HOME/.composer/vendor/bin
+export PATH=$PATH:$HOME/.composer/vendor/bin:$HOME/bin
 
 # load zgen
 source "${HOME}/.zgen/zgen.zsh"

@@ -11,12 +11,12 @@ let php_htmlInStrings = 1
 " Change cursor on insert mode
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " Use 2 spaces when using Tab key or < >
-set expandtab
-set tabstop=2
+set expandtab!
+set tabstop=4
 set smarttab
 set autoindent
 set smartindent
-set shiftwidth=2
+set shiftwidth=4
 " No beeps!
 set noerrorbells
 set visualbell
