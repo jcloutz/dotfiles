@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/jeremycloutier/clients/radix-bay/richard-tocado/docker-stack/code'
+let g:netrw_dirhist_2='/Users/jeremycloutier/clients/radix-bay/richard-tocado/docker-stack/code/API'
+let g:netrw_dirhist_3='/Users/jeremycloutier/clients/radix-bay/richard-tocado/docker-stack/code/API/Http'
+let g:netrw_dirhist_4='/Users/jeremycloutier/clients/radix-bay/richard-tocado/docker-stack/code/API/Http/Controllers'
+let g:netrw_dirhist_5='/Users/jeremycloutier/clients/radix-bay/richard-tocado/docker-stack/code/API/Http/Controllers/RealtorSales'

@@ -51,7 +51,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow docker docker-compose dotenv laravel5 omposer go golang npm nvm postgres rsync yarn)
+plugins=(git git-flow docker docker-compose dotenv laravel5 composer go golang npm nvm postgres rsync yarn)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -88,8 +88,11 @@ source "${HOME}/.zgen/zgen.zsh"
 source "${HOME}/.zgen/subnixr/minimal-master/minimal.zsh"
 source ~/.aliases
 
+# Enable Direnv
 eval "$(direnv hook zsh)"
 
+# Go project generator for direnv
+# http://rachbelaid.com/handling-go-workspace-with-direnv/
 function mkgoproject {
   TRAPINT() {
     print "Caught SIGINT, aborting."

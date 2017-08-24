@@ -182,7 +182,7 @@
 	insteadOf = "gist:"
 [user]
 	name = Jeremy Cloutier
-	email = jcloutier24@yahoo.com
+	email = jeremy.cloutier@radixbay.com
 [http "https://gopkg.in"]
 	followRedirects = true
 # [http "https://upper.io"]
