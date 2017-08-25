@@ -19,7 +19,17 @@ Thumbs.db
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes
+.DS_Store
 
 # Node & Composer
 vendor/
 node_modules/
+
+# Swap files
+*.swp
+
+# .config ignore all except specified
+!.config/
+.config/*
+!.config/nvim/
+
