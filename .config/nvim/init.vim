@@ -1,3 +1,6 @@
+set nocompatible
+set hidden
+
 " Basic look and feel
 set number
 set relativenumber
@@ -17,6 +20,9 @@ set smarttab
 set autoindent
 set smartindent
 set shiftwidth=4
+
+set autowrite
+
 " No beeps!
 set noerrorbells
 set visualbell
@@ -69,7 +75,17 @@ Plug 'yggdroot/indentline'
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+" Vim go
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'Shougo/deoplete.nvim'
+Plug 'zchee/deoplete-go'
+Plug 'majutsushi/tagbar'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'garyburd/go-explorer'
+Plug 'tpope/vim-dispatch'
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -77,7 +93,54 @@ let g:airline_theme='dracula'
 let g:quantum_black=1
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""
+filetype plugin indent on    " required
+
+syntax on
 " Set Colorscheme
+
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 colorscheme dracula
 set background=dark
+
+" use tab to forward cycle
+inoremap <silent><expr> <TAB>
+		\ pumvisible() ? "\<C-n>" :
+		\ <SID>check_back_space() ? "\<TAB>" :
+		\ deoplete#mappings#manual_complete()
+		function! s:check_back_space() abort "{{{
+		let col = col('.') - 1
+		return !col || getline('.')[col - 1]  =~ '\s'
+		endfunction"}}}
+
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+       function! s:my_cr_function() abort
+         return deoplete#close_popup() . "\<CR>"
+       endfunction
+
+" go-vim
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_term_enabled = 1
+let g:go_list_type = "quickfix"
+let g:go_addtags_transform = "camelcase"
+
+let g:deoplete#enable_at_startup = 1
+
+map <C-n> :cnext<cr>
+map <C-m> :cprevious<cr>
+noremap <leader>a :cclose<cr>
+
+augroup vimgo
+    autocmd FileType go nmap <leader>r  :GoRun<CR>
+    autocmd FileType go nmap <leader>b  :GoBuild<CR>
+augroup END
+
+augroup autosourcing
+	autocmd!
+	autocmd BufWritePost init.vim source %
+augroup END
+

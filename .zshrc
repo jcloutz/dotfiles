@@ -1,6 +1,11 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+export PATH=$PATH:$HOME/.composer/vendor/bin:$HOME/bin:$GOPATH/bin
+
+export GOPATH="$HOME/develop/GoCode/"
+export GOBIN="$HOME/develop/GoCode/bin"
+
 # Path to your oh-my-zsh installation.
   export ZSH=$HOME/.oh-my-zsh
 
@@ -82,8 +87,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-export PATH=$PATH:$HOME/.composer/vendor/bin:$HOME/bin
 
 # load zgen
 source "${HOME}/.zgen/zgen.zsh"
