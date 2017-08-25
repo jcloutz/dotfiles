@@ -39,6 +39,14 @@ Plug 'dracula/vim'
 " NERDTree
 Plug 'scrooloose/nerdtree'
 nmap <C-\> :NERDTreeToggle %<cr>
+
+" Ctrl-P
+Plug 'kien/ctrlp.vim'
+let g:ctrlp_map='<c-p>'
+let g:ctrlp_working_path_mode='r'
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
+set wildignore+=*/tmp/*,*/vendor/*,*/node_modules/*,*/.git/*
 " Emmet
 Plug 'mattn/emmet-vim'
 " Use tab key for extending emmet rather
