@@ -93,6 +93,9 @@ let g:airline_theme='dracula'
 let g:quantum_black=1
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""
+
+let mapleader=","
+
 filetype plugin indent on    " required
 
 syntax on
@@ -135,8 +138,20 @@ map <C-m> :cprevious<cr>
 noremap <leader>a :cclose<cr>
 
 augroup vimgo
+	" run :GoBuild or :GoTestCompile based on the go file
+	function! s:build_go_files()
+	  let l:file = expand('%')
+	  if l:file =~# '^\f\+_test\.go$'
+		call go#test#Test(0, 1)
+	  elseif l:file =~# '^\f\+\.go$'
+		call go#cmd#Build(0)
+	  endif
+	endfunction
+
+	autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
     autocmd FileType go nmap <leader>r  :GoRun<CR>
-    autocmd FileType go nmap <leader>b  :GoBuild<CR>
+    " autocmd FileType go nmap <leader>b  :GoBuild<CR>
+    autocmd FileType go nmap <leader>t  :GoTest<CR>
 augroup END
 
 augroup autosourcing

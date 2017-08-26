@@ -32,4 +32,5 @@ node_modules/
 !.config/
 .config/*
 !.config/nvim/
+.config/nvim/plugged
 
