@@ -15,7 +15,7 @@ set linespace=0
 syntax on
 let php_htmlInStrings = 1
 " Change cursor on insert mode
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+" let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " Use 2 spaces when using Tab key or < >
 set expandtab!
 set tabstop=4
@@ -137,16 +137,10 @@ let g:deoplete#sources#go#gocode_binary = '/Users/jeremyc/develop/GoCode/bin/goc
 set completeopt+=noinsert
 set completeopt+=noselect
 set completeopt-=preview " disable preview window at the bottom of the screen
-inoremap <silent><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-inoremap <silent><expr> <TAB>
-		\ pumvisible() ? "\<C-n>" :
-		\ <SID>check_back_space() ? "\<TAB>" :
-		\ deoplete#mappings#manual_complete()
-		function! s:check_back_space() abort "{{{
-		let col = col('.') - 1
-		return !col || getline('.')[col - 1]  =~ '\s'
-		endfunction"}}}
+" inoremap <silent><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>"
+        \ : (<SID>is_whitespace() ? "\<Tab>" : deoplete#mappings#manual_complete())
+  inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<C-h>"
 
 map <C-n> :cnext<cr>
 map <C-m> :cprevious<cr>
