@@ -8,6 +8,9 @@ set ruler
 set nowrap
 set scrolloff=8
 set linespace=0
+" set splitbelow
+" set splitright
+
 " Syntax settings
 syntax on
 let php_htmlInStrings = 1
@@ -78,8 +81,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Vim go
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Shougo/deoplete.nvim'
-Plug 'zchee/deoplete-go'
+Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'majutsushi/tagbar'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
@@ -105,7 +109,36 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 colorscheme dracula
 set background=dark
 
-" use tab to forward cycle
+
+" go-vim
+let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+let g:go_term_enabled = 1
+let g:go_list_type = "quickfix"
+let g:go_addtags_transform = "snake_cake"
+let g:go_meta_linter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_meta_linter_autosave = 1
+let g:go_auto_type_info = 1
+set updatetime=100
+
+" deoplete
+" --------
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#go#gocode_binary = '/Users/jeremyc/develop/GoCode/bin/gocode'
+set completeopt+=noinsert
+set completeopt+=noselect
+set completeopt-=preview " disable preview window at the bottom of the screen
+inoremap <silent><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
 inoremap <silent><expr> <TAB>
 		\ pumvisible() ? "\<C-n>" :
 		\ <SID>check_back_space() ? "\<TAB>" :
@@ -115,43 +148,49 @@ inoremap <silent><expr> <TAB>
 		return !col || getline('.')[col - 1]  =~ '\s'
 		endfunction"}}}
 
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-       function! s:my_cr_function() abort
-         return deoplete#close_popup() . "\<CR>"
-       endfunction
-
-" go-vim
-let g:go_fmt_command = "goimports"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_term_enabled = 1
-let g:go_list_type = "quickfix"
-let g:go_addtags_transform = "camelcase"
-
-let g:deoplete#enable_at_startup = 1
-
 map <C-n> :cnext<cr>
 map <C-m> :cprevious<cr>
 noremap <leader>a :cclose<cr>
 
+" Terminal
+:tnoremap <Esc> <C-\><C-n>
+
+" Split Panes
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+map <C-S><C-J> :sp<cr>
+map <C-S><C-L> :vsp<cr>
+
+
 augroup vimgo
 	" run :GoBuild or :GoTestCompile based on the go file
 	function! s:build_go_files()
-	  let l:file = expand('%')
-	  if l:file =~# '^\f\+_test\.go$'
-		call go#test#Test(0, 1)
-	  elseif l:file =~# '^\f\+\.go$'
-		call go#cmd#Build(0)
-	  endif
-	endfunction
+	    let l:file = expand('%')
+	    if l:file =~# '^\f\+_test\.go$'
+		    call go#test#Test(0, 1)
+	    elseif l:file =~# '^\f\+\.go$'
+	        call go#cmd#Build(0)
+	    endif
+    endfunction
 
 	autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
     autocmd FileType go nmap <leader>r  :GoRun<CR>
     " autocmd FileType go nmap <leader>b  :GoBuild<CR>
     autocmd FileType go nmap <leader>t  :GoTest<CR>
+    autocmd FileType go nmap <leader>c :GoCoverageToggle<CR>
+    autocmd FileType go nmap <leader>v :GoAlternate<CR>
+	autocmd FileType go nmap <leader>i :GoInfo<CR>
+	autocmd FileType go nmap <leader>d :GoDoc<CR>
+
+	autocmd FileType go nmap gS :SplitjoinSplit<CR>
+	autocmd FileType go nmap gJ :SplitjoinJoin<CR> 
+    
+	autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+	autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+	autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+	autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 augroup END
 
 augroup autosourcing
