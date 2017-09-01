@@ -12,6 +12,9 @@ Desktop.ini
 .vscode/
 *.sublime-*
 
+# Bin directory
+bin/
+
 # Thumbnail cache files
 ._*
 Thumbs.db

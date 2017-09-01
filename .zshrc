@@ -1,8 +1,8 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export GOPATH="$HOME/develop/GoCode"
-export GOBIN="$HOME/develop/GoCode/bin"
+export GOPATH="$HOME"
+export GOBIN="$HOME/bin"
 
 export PATH=$PATH:$HOME/.composer/vendor/bin:$HOME/bin:$GOBIN
 
